@@ -8,6 +8,10 @@ services
     nginx: can handle a high volume of connections, nginx is commonly used as a reverse proxy and load balancer to manage incoming traffic and distribute it to slower upstream servers 
     tomcat: application server to host java web application
     rabbitmq: broker/queueing agent, most widely deployed open source message broker
+        without message broker 
+            - request is continously flowing from one service to another with no organization and is more prone to error 
+        with message broker 
+            - message broker solves this thru message queue, first request to got in is the first one to get to another service 
     memcache: db caching | in-memory-key-value store for small chunks of arbitrary data (string, objects) from results of database calls 
     elasticsearch: indexing/search service 
     mysql: sql database 
