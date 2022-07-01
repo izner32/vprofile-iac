@@ -1,0 +1,29 @@
+architecture explanation
+    -> client sends a request 
+    -> request is then collected by nginx and distributed to application server
+    -> that request is then forwarded to rabbit mq for queueing 
+    -> request is then stored in cache (to dbs) for later retrieval when similar request has been done 
+
+services 
+    nginx: can handle a high volume of connections, nginx is commonly used as a reverse proxy and load balancer to manage incoming traffic and distribute it to slower upstream servers 
+    tomcat: application server to host java web application
+    rabbitmq: broker/queueing agent, most widely deployed open source message broker
+    memcache: db caching | in-memory-key-value store for small chunks of arbitrary data (string, objects) from results of database calls 
+    elasticsearch: indexing/search service 
+    mysql: sql database 
+
+flow
+    -> setup tools: install necessary tools  
+        hypervisor: oracle vm virtualbox 
+        vm lifecycle automation: vagrant 
+        cli: git bash 
+    -> vagrant setup: setup automatic creation of multiple vms, note that each tool(rabbitmq,tomcat,etc.) is deployed on its own vm 
+        -> setup manually provisioning for each vm  (skip if you know what youre doing)
+            - well it's hard to automate if you don't understand what youre doing, and doing it first manually can help you understand better what to do 
+        -> setup provisioning for each vm (think of provisioning as setting up)
+            -> mysql
+            -> memcache 
+            -> rabbitmq 
+            -> tomcat 
+                -> code build and deploy: create artifact of application then deploy it to tomcat 
+            -> setup nginx 
